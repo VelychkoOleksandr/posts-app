@@ -1,3 +1,9 @@
 export const SAVE_USERS = 'SAVE_USERS';
-export const ADD = 'ADD';
+export const SAVE_USER_POSTS = 'SAVE_USER_POSTS';
+
+export const SAVE_POST_COMMENTS = 'SAVE_POST_COMMENTS';
+export const SAVE_SELECTED_POST = 'SAVE_SELECTED_POST';
+export const EDIT_POST = 'EDIT_POS';
+
+export const SAVE_NEW_POST = 'SAVE_NEW_POST';
 

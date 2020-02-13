@@ -1,0 +1,10 @@
+.btn-add-continer {
+  display: flex;
+  justify-content: space-around;
+
+  margin-bottom: 1%;
+}
+
+.btn-add-continer > a {
+  width: 30%;
+}

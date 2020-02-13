@@ -1,0 +1,13 @@
+.users-table-container {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.users-table-container .users-table {
+  width: 80%;
+  text-align: center;
+
+  margin-top: 2%;
+}

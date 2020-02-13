@@ -1,42 +1,33 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
 import './app.css';
 
-import UsersApiService from '../../services/users-api-service';
-import PostsApiService from '../../services/posts-api-service';
-import CommentsApiService from '../../services/comments-api-service';
-
-import { connect } from "react-redux";
-import { save_users } from '../../redux/action-creators/action-creators';
-import { SAVE_USERS } from '../../redux/action-types/action-types';
+import UserListPage from "./user-list-page";
+import PostsListPage from './posts-list-page';
+import AddNewPostPage from './add-new-post-page';
+import PostDetails from './post-details';
+import PostEditPage from './post-edit-page';
 
 class App extends Component {
 
-  UsersApiService = new UsersApiService();
-  PostsApiService = new PostsApiService();
-  CommentsApiService = new CommentsApiService();
-
-  async componentDidMount() {
-    const users = await this.UsersApiService.getUsersList();
-    this.props.saveUsersToRedux(users);
-    
-  }
-
   render() {
     return (
-      <div>
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path='/' component={UserListPage} />
+          <Route exact path='/posts/:id' component={PostsListPage} />
+          <Route exact path='/posts/:id/add' component={AddNewPostPage} />
+          <Route exact path='/post/:id' component={PostDetails} />
+          <Route exact path='/post/:id/edit' component={PostEditPage} />
+        </Switch>
+      </Router>
     );
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    saveUsersToRedux: (users) => dispatch({
-      type: SAVE_USERS, 
-      payload: users
-    })
-  }
-}
-
-export default connect(null, mapDispatchToProps)(App);
+export default App;

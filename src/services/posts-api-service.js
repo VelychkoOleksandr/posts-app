@@ -1,8 +1,16 @@
 export default class PostsApiService {
 
-  _postsPostURL = 'https://jsonplaceholder.typicode.com/posts';
-  _postsUpdateByIDBaseURL = 'https://jsonplaceholder.typicode.com/posts/'
-  _postsByIDBaseURL = 'https://jsonplaceholder.typicode.com/posts?userId=';
+  _postsPostURL =           'https://jsonplaceholder.typicode.com/posts';
+  _postsUpdateByIDBaseURL = 'https://jsonplaceholder.typicode.com/posts/';
+  _postsByIDBaseURL =       'https://jsonplaceholder.typicode.com/posts?userId=';
+
+  async getPostByID(id) {
+    const postURL = `${this._postsUpdateByIDBaseURL}${id}`;
+    const post = await fetch(postURL)
+      .then(post => post.json());
+
+    return post;
+  }
 
   async getPostsListByID(id) {
     const userPostsUrl = `${this._postsByIDBaseURL}${id}`;
