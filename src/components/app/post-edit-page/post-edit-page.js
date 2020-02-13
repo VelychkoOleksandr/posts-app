@@ -42,7 +42,10 @@ class PostEditPage extends React.Component {
   }
 
   onSubmitPost = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
+
+    e.target.disabled = true
+
 
     this.props.saveEditedPost({
       id: this.props.match.params.id,

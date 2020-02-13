@@ -8,6 +8,7 @@ import { save_post_comments, save_selected_post } from '../../../redux/action-cr
 import withPostsAPIService from '../../../services/with-services-hoc/with-post-api-service-hoc';
 import withCommentsAPIService from '../../../services/with-services-hoc/with-comments-api-service';
 import NavBar from '../nav-bar/nav-bar';
+import Spinner from '../spinner'
 
 class PostDetails extends React.Component {
 
@@ -17,13 +18,13 @@ class PostDetails extends React.Component {
       this.props.history.goBack()
       return;
     }
-    
+
     //INITIALIZE EDITED POST
     if (!this.props.selectedPost) {
       const selectedPost = await this.props.postsApiService.getPostByID(this.props.match.params.id)
       this.props.saveSelectedPost(selectedPost)
     }
-    
+
     const postComments = await this.props.commentsApiService.getPostComments(this.props.match.params.id)
     this.props.savePostCommentsToRedux(postComments)
   }
@@ -32,7 +33,9 @@ class PostDetails extends React.Component {
     this.props.saveSelectedPost('')
   }
 
-  onDeletePost = async () => {
+  onDeletePost = async (e) => {
+    e.target.disabled = true
+
     this.props.postsApiService.deletePostByID(this.props.match.params.id)
       .then(() => {
         alert('Post Deleted')
@@ -82,18 +85,26 @@ class PostDetails extends React.Component {
 
         <h2 className='text-uppercase header'>Post</h2>
         <div className='users-table-container'>
-          <table className='users-table table table-striped'>
-            {selectedPost}
-          </table>
+          {
+            selectedPost
+              ? <table className='users-table table table-striped'>
+                {selectedPost}
+              </table>
+              : <Spinner />
+          }
         </div>
 
         <h2 className='text-uppercase header'>Comments</h2>
         <div className='users-table-container'>
-          <table className='users-table table table-striped table-hover'>
-            <tbody>
-              {commentsList}
-            </tbody>
-          </table>
+          {
+            commentsList
+              ? <table className='users-table table table-striped table-hover'>
+                  <tbody>
+                    {commentsList}
+                  </tbody>
+                </table>
+              : <Spinner />
+          }
         </div>
       </React.Fragment>
     )
