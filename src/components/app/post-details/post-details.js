@@ -12,12 +12,18 @@ import NavBar from '../nav-bar/nav-bar';
 class PostDetails extends React.Component {
 
   async componentDidMount() {
-     //INITIALIZE EDITED POST
-     if (!this.props.selectedPost) {
+    if (this.props.match.params.id > 100) {
+      alert(`Error. Can't edit unsaved post`)
+      this.props.history.goBack()
+      return;
+    }
+    
+    //INITIALIZE EDITED POST
+    if (!this.props.selectedPost) {
       const selectedPost = await this.props.postsApiService.getPostByID(this.props.match.params.id)
       this.props.saveSelectedPost(selectedPost)
     }
-
+    
     const postComments = await this.props.commentsApiService.getPostComments(this.props.match.params.id)
     this.props.savePostCommentsToRedux(postComments)
   }
@@ -32,7 +38,7 @@ class PostDetails extends React.Component {
         alert('Server Error. Post not deleted')
         this.redirectToMain()
       })
-}
+  }
 
   redirectToMain() {
     this.props.history.push(`/`)
@@ -48,17 +54,17 @@ class PostDetails extends React.Component {
           <td>{this.props.selectedPost.title}</td>
           <td>{this.props.selectedPost.body}</td>
           <td>
-            <Link to={ postEditPageLink } className='btn btn-success'>EDIT</Link>
+            <Link to={postEditPageLink} className='btn btn-success'>EDIT</Link>
           </td>
           <td>
-            <button className='btn btn-danger' onClick={ this.onDeletePost }>DELETE</button>
+            <button className='btn btn-danger' onClick={this.onDeletePost}>DELETE</button>
           </td>
         </tr>
       </tbody>
       : null;
 
     const commentsList = this.props.postComments
-      ? this.props.postComments.map(({id, name, email, body}) =>
+      ? this.props.postComments.map(({ id, name, email, body }) =>
         <tr key={id} className='comment'>
           <td>{name}</td>
           <td>{email}</td>
@@ -93,7 +99,8 @@ class PostDetails extends React.Component {
 function mapStateToProps(state) {
   return {
     postComments: state.postComments,
-    selectedPost: state.selectedPost
+    selectedPost: state.selectedPost,
+    isPostEdited: state.isPostEdited
   }
 }
 

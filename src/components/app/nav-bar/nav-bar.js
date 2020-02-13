@@ -1,14 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { save_selected_post } from '../../../redux/action-creators/action-creators';
 
-export default function NavBar() {
+function NavBar(props) {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link className="navbar-brand" to="/" disabled>MAIN</Link>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <Link className="navbar-toggler-icon"></Link>
-      </button>
+      <Link className="navbar-brand" to="/" onClick={ props.clearSelectedPost }>MAIN</Link>
     </nav>
   );
 }
+
+function mapDispatchToProps(dispatch) {
+  return {
+    clearSelectedPost: () => dispatch({
+      type: save_selected_post(),
+      payload: ''
+    })
+  }
+}
+
+export default connect(null, mapDispatchToProps)(NavBar);

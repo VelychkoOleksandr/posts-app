@@ -32,13 +32,13 @@ export default function reducer(state = {}, action) {
     case SAVE_SELECTED_POST:
       return {
         ...state,
-        selectedPost: action.payload
+        selectedPost: action.payload,
       }
 
     case EDIT_POST:
       return {
         ...state,
-        selectedPost: action.payload
+        selectedPost: action.payload,
       }
 
     default:

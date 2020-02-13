@@ -18,6 +18,7 @@ class AddNewPostPage extends React.Component {
 
   onSubmitPost = async (e) => {
     e.preventDefault()
+    e.target.disabled = true
 
     const newPost = await this.props.postsApiService.addNewPost(this.props.match.params.id, this.state.title, this.state.body)
 
@@ -88,6 +89,6 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(
+export default connect(null, mapDispatchToProps)( 
   withPostsAPIService(AddNewPostPage)
 );
