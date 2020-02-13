@@ -28,6 +28,10 @@ class PostDetails extends React.Component {
     this.props.savePostCommentsToRedux(postComments)
   }
 
+  componentWillUnmount() {
+    this.props.saveSelectedPost('')
+  }
+
   onDeletePost = async () => {
     this.props.postsApiService.deletePostByID(this.props.match.params.id)
       .then(() => {
