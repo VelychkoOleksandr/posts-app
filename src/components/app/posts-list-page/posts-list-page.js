@@ -6,14 +6,14 @@ import { save_posts } from "../../../redux/action-creators/action-creators";
 
 import './posts-list-page.css';
 import { Link } from "react-router-dom";
-import NavBar from "../../nav-bar/nav-bar";
+import NavBar from "../nav-bar/nav-bar";
 
 class PostsListPage extends React.Component {
 
   async componentDidMount() {
     if (!this.props.posts) {
-      const posts = await this.props.postsApiService.getPostsListByID(this.props.match.params.id);
-      this.props.savePostsToRedux(posts);
+      const posts = await this.props.postsApiService.getPostsListByID(this.props.match.params.id)
+      this.props.savePostsToRedux(posts)
     }
   }
 
@@ -22,7 +22,7 @@ class PostsListPage extends React.Component {
   }
 
   render() {
-    const addNewPostLink = `/posts/${this.props.match.params.id}/add`;    
+    const addNewPostLink = `/posts/${this.props.match.params.id}/add`;   
 
     return (
       <React.Fragment>

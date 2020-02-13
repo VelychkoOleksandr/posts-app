@@ -7,19 +7,19 @@ import './post-details-page.css';
 import { save_post_comments, save_selected_post } from '../../../redux/action-creators/action-creators';
 import withPostsAPIService from '../../../services/with-services-hoc/with-post-api-service-hoc';
 import withCommentsAPIService from '../../../services/with-services-hoc/with-comments-api-service';
-import NavBar from '../../nav-bar/nav-bar';
+import NavBar from '../nav-bar/nav-bar';
 
 class PostDetails extends React.Component {
 
   async componentDidMount() {
      //INITIALIZE EDITED POST
      if (!this.props.selectedPost) {
-      const selectedPost = await this.props.postsApiService.getPostByID(this.props.match.params.id);
-      this.props.saveSelectedPost(selectedPost);
+      const selectedPost = await this.props.postsApiService.getPostByID(this.props.match.params.id)
+      this.props.saveSelectedPost(selectedPost)
     }
 
     const postComments = await this.props.commentsApiService.getPostComments(this.props.match.params.id)
-    this.props.savePostCommentsToRedux(postComments);
+    this.props.savePostCommentsToRedux(postComments)
   }
 
   onDeletePost = async () => {
@@ -107,9 +107,9 @@ const mapDispatchToProps = (dispatch) => ({
     type: save_selected_post(),
     payload
   })
-});
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   withCommentsAPIService(
     withPostsAPIService(PostDetails))
-);
+)

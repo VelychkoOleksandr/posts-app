@@ -5,7 +5,7 @@ import './add-new-post-page.css';
 
 import withPostsAPIService from "../../../services/with-services-hoc/with-post-api-service-hoc";
 import { save_new_post } from "../../../redux/action-creators/action-creators";
-import NavBar from "../../nav-bar/nav-bar";
+import NavBar from "../nav-bar/nav-bar";
 
 class AddNewPostPage extends React.Component {
 
@@ -17,9 +17,9 @@ class AddNewPostPage extends React.Component {
   }
 
   onSubmitPost = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const newPost = await this.props.postsApiService.addNewPost(this.props.match.params.id, this.state.title, this.state.body);
+    const newPost = await this.props.postsApiService.addNewPost(this.props.match.params.id, this.state.title, this.state.body)
 
     if (newPost) {
       this.props.saveNewPost(newPost)
@@ -65,7 +65,7 @@ class AddNewPostPage extends React.Component {
 
             <div className="form-group">
               <label htmlFor="description">Description:</label>
-              <textarea className="form-control" id="description" placeholder="Enter post" onChange={this.onBodyChange} value={this.state.body} />
+              <textarea className="form-control" id="description" placeholder="Enter post" rows='5' onChange={this.onBodyChange} value={this.state.body} />
             </div>
 
             <div className='btn-submit-wrapper'>

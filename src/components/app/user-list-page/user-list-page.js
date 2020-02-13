@@ -7,7 +7,7 @@ import './user-list-page.css';
 
 import { save_users } from "../../../redux/action-creators/action-creators";
 import withUsersAPIService from "../../../services/with-services-hoc/with-users-api-service";
-import NavBar from "../../nav-bar/nav-bar";
+import NavBar from "../nav-bar/nav-bar";
 import Spinner from "../spinner/spinner";
 
 class UserListPage extends React.Component {

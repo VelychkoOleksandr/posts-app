@@ -4,7 +4,7 @@ import './post-edit-page.css';
 import withPostsAPIService from "../../../services/with-services-hoc/with-post-api-service-hoc";
 import { connect } from "react-redux";
 import { edit_post } from "../../../redux/action-creators/action-creators";
-import NavBar from "../../nav-bar/nav-bar";
+import NavBar from "../nav-bar/nav-bar";
 
 class PostEditPage extends React.Component {
 
@@ -143,4 +143,4 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   withPostsAPIService(PostEditPage)
-);
+)
