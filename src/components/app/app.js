@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 
 import './app.css';
@@ -24,6 +25,8 @@ class App extends Component {
           <Route exact path='/posts/:id/add' component={AddNewPostPage} />
           <Route exact path='/post/:id' component={PostDetails} />
           <Route exact path='/post/:id/edit' component={PostEditPage} />
+
+          <Redirect to='/' />
         </Switch>
       </Router>
     );
